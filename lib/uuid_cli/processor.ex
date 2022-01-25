@@ -7,6 +7,9 @@ defmodule UuidCli.Processor do
 
   # ===== GENERATE =====
 
+  @doc """
+  Generate a UUID.
+  """
   @spec generate(UuidCli.Config.t()) :: bitstring()
   def generate(_config) do
     UUID.uuid4()
@@ -14,6 +17,9 @@ defmodule UuidCli.Processor do
 
   # ===== RANDOM CASE =====
 
+  @doc """
+  Switch randomly case if configured.
+  """
   @spec random_case(bitstring(), UuidCli.Config.t()) :: bitstring()
   def random_case(uuid, %Config{random_case: true}) do
     uuid =
@@ -29,11 +35,14 @@ defmodule UuidCli.Processor do
 
   # ===== CUT =====
 
+  @doc """
+  Cut off characters to match the expected length.
+  """
   @spec cut(bitstring(), UuidCli.Config.t()) :: bitstring()
   def cut(uuid, %Config{chars: chars}) do
     uuid =
       if chars > 0 do
-        uuid |> String.splitter("") |> Enum.take(chars + 1)
+        uuid |> String.split_at(chars) |> elem(0)
       else
         uuid
       end
@@ -43,15 +52,11 @@ defmodule UuidCli.Processor do
 
   # ===== ===== PRIVATE ===== =====
 
-  defp random_case_char(char) when is_bitstring(char) do
+  defp random_case_char(char) do
     if :rand.uniform() < 0.5 do
       String.upcase(char)
     else
       char
     end
-  end
-
-  defp random_case_char(char) do
-    char
   end
 end

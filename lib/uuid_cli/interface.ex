@@ -46,13 +46,18 @@ defmodule UuidCli.Interface do
       short: "-c",
       long: "--chars",
       help: "Amount of characters",
-      parser: fn n ->
-        case Integer.parse(n) do
-          :error -> {:error, "Must be integer"}
-          {chars, ""} -> {:ok, chars}
-        end
-      end,
+      parser: &postive_int_parser/1,
       default: -1
     ]
+  end
+
+  # ===== PARSER =====
+
+  defp postive_int_parser(n) do
+    case Integer.parse(n) do
+      :error -> {:error, "Must be postive integer"}
+      {chars, ""} when chars <= 0 -> {:error, "Must be postive integer"}
+      {chars, ""} -> {:ok, chars}
+    end
   end
 end

@@ -15,6 +15,7 @@ defmodule UuidCli do
 
   # ===== ===== PRIVATE ===== =====
 
+  # Do the work
   defp run(parse_result) do
     config =
       parse_result
@@ -26,6 +27,7 @@ defmodule UuidCli do
     |> Processor.cut(config)
   end
 
+  # Output the work
   defp output(uuid) do
     IO.puts(uuid)
   end
