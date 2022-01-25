@@ -8,6 +8,19 @@ defmodule UuidCli.Config do
 
   alias UuidCli.Config
 
+  @spec debug(Optimus.ParseResult.t()) :: Optimus.ParseResult.t()
+  def debug(
+        %Optimus.ParseResult{
+          flags: %{verbose: verbose}
+        } = parse_result
+      ) do
+    if verbose do
+      IO.inspect(parse_result)
+    end
+
+    parse_result
+  end
+
   @doc """
   Creates a config from the parse result.
   """

@@ -16,14 +16,17 @@ defmodule UuidCli do
   # ===== ===== PRIVATE ===== =====
 
   defp run(parse_result) do
-    parse_result
-    |> Processor.debug()
-    |> Config.from_parsed()
-    |> Processor.generate()
-    |> Processor.cut()
+    config =
+      parse_result
+      |> Config.debug()
+      |> Config.from_parsed()
+
+    Processor.generate(config)
+    |> Processor.random_case(config)
+    |> Processor.cut(config)
   end
 
-  defp output({uuid, _config}) do
+  defp output(uuid) do
     IO.puts(uuid)
   end
 end

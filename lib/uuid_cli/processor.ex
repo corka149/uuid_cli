@@ -5,38 +5,32 @@ defmodule UuidCli.Processor do
 
   alias UuidCli.Config
 
-  @spec debug(Optimus.ParseResult.t()) :: Optimus.ParseResult.t()
-  def debug(
-        %Optimus.ParseResult{
-          flags: %{verbose: verbose}
-        } = parse_result
-      ) do
-    if verbose do
-      IO.inspect(parse_result)
-    end
-
-    parse_result
-  end
-
   # ===== GENERATE =====
 
-  def generate(%Config{random_case: true} = config) do
+  @spec generate(UuidCli.Config.t()) :: bitstring()
+  def generate(_config) do
+    UUID.uuid4()
+  end
+
+  # ===== RANDOM CASE =====
+
+  @spec random_case(bitstring(), UuidCli.Config.t()) :: bitstring()
+  def random_case(uuid, %Config{random_case: true}) do
     uuid =
-      UUID.uuid4()
+      uuid
       |> String.splitter("")
-      |> Enum.map(&random_case/1)
+      |> Enum.map(&random_case_char/1)
       |> Enum.join()
 
-    {uuid, config}
+    uuid
   end
 
-  def generate(%Config{random_case: false} = config) do
-    {UUID.uuid4(), config}
-  end
+  def random_case(uuid, _config), do: uuid
 
   # ===== CUT =====
 
-  def cut({uuid, %Config{chars: chars} = config}) do
+  @spec cut(bitstring(), UuidCli.Config.t()) :: bitstring()
+  def cut(uuid, %Config{chars: chars}) do
     uuid =
       if chars > 0 do
         uuid |> String.splitter("") |> Enum.take(chars + 1)
@@ -44,12 +38,12 @@ defmodule UuidCli.Processor do
         uuid
       end
 
-    {uuid, config}
+    uuid
   end
 
   # ===== ===== PRIVATE ===== =====
 
-  defp random_case(char) when is_bitstring(char) do
+  defp random_case_char(char) when is_bitstring(char) do
     if :rand.uniform() < 0.5 do
       String.upcase(char)
     else
@@ -57,7 +51,7 @@ defmodule UuidCli.Processor do
     end
   end
 
-  defp random_case(char) do
+  defp random_case_char(char) do
     char
   end
 end
