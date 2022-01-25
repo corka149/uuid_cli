@@ -1,21 +1,10 @@
 # UuidCli
 
-**TODO: Add description**
+A quick and easy way to generate UUIDs for different cases.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `uuid_cli` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:uuid_cli, "~> 0.1.0"}
-  ]
-end
+Install it as an escript:
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/uuid_cli](https://hexdocs.pm/uuid_cli).
-
+mix escript.install github corka149/uuid_cli
+```

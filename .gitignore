@@ -25,3 +25,5 @@ uuid_cli-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 uuid
+
+.vscode
