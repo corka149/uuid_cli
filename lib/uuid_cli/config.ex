@@ -3,6 +3,7 @@ defmodule UuidCli.Config do
   Holds the whole configration of the CLI.
   """
 
+  @type t :: %__MODULE__{chars: pos_integer(), verbose: boolean(), random_case: boolean()}
   defstruct chars: 0, verbose: false, random_case: false
 
   alias UuidCli.Config
