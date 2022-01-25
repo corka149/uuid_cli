@@ -15,7 +15,7 @@ defmodule UuidCli.Config do
         } = parse_result
       ) do
     if verbose do
-      IO.inspect(parse_result)
+      IO.inspect(:stderr, parse_result, [])
     end
 
     parse_result
