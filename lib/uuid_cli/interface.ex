@@ -57,7 +57,7 @@ defmodule UuidCli.Interface do
       long: "--chars",
       help: "Amount of characters",
       parser: &postive_int_parser/1,
-      default: -1
+      default: 0
     ]
   end
 
