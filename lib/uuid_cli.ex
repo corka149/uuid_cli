@@ -25,6 +25,7 @@ defmodule UuidCli do
     Processor.generate(config)
     |> Processor.random_case(config)
     |> Processor.cut(config)
+    |> Processor.replace_ambiguous(config)
   end
 
   # Output the work

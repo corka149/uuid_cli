@@ -50,6 +50,17 @@ defmodule UuidCli.Processor do
     uuid
   end
 
+  # ===== REPLACE AMBIGUOUS ======
+
+  @spec replace_ambiguous(bitstring(), UuidCli.Config.t()) :: bitstring()
+  def replace_ambiguous(uuid, %Config{replace_ambiguous: true}) do
+    uuid
+    |> String.replace("O", "Q")
+    |> String.replace("0", "Q")
+  end
+
+  def replace_ambiguous(uuid, _config), do: uuid
+
   # ===== ===== PRIVATE ===== =====
 
   defp random_case_char(char) do

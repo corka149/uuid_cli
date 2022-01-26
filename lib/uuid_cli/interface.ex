@@ -14,7 +14,8 @@ defmodule UuidCli.Interface do
       allow_unknown_args: false,
       flags: [
         random_case: random_case_flag(),
-        verbose: verbose_flag()
+        verbose: verbose_flag(),
+        replace_ambiguous: replace_ambiguous_chars_flag()
       ],
       options: [
         chars: chars_option()
@@ -36,6 +37,15 @@ defmodule UuidCli.Interface do
       short: "-v",
       long: "--verbose",
       help: "Activates verbose mode",
+      multiple: false
+    ]
+  end
+
+  defp replace_ambiguous_chars_flag do
+    [
+      short: "-a",
+      long: "--replace-ambiguous",
+      help: "Replace ambiguous chars O and 0 by Q",
       multiple: false
     ]
   end

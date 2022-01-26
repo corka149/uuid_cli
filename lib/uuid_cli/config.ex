@@ -3,8 +3,13 @@ defmodule UuidCli.Config do
   Holds the whole configration of the CLI.
   """
 
-  @type t :: %__MODULE__{chars: pos_integer(), verbose: boolean(), random_case: boolean()}
-  defstruct chars: 0, verbose: false, random_case: false
+  @type t :: %__MODULE__{
+          chars: pos_integer(),
+          verbose: boolean(),
+          random_case: boolean(),
+          replace_ambiguous: boolean()
+        }
+  defstruct chars: 0, verbose: false, random_case: false, replace_ambiguous: false
 
   alias UuidCli.Config
 
@@ -31,14 +36,15 @@ defmodule UuidCli.Config do
         }
   def from_parsed(%Optimus.ParseResult{
         args: %{},
-        flags: %{random_case: random_case, verbose: verbose},
+        flags: %{random_case: random_case, verbose: verbose, replace_ambiguous: replace_ambiguous},
         options: %{chars: chars},
         unknown: []
       }) do
     %Config{
       chars: chars,
       verbose: verbose,
-      random_case: random_case
+      random_case: random_case,
+      replace_ambiguous: replace_ambiguous
     }
   end
 end
