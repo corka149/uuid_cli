@@ -36,16 +36,14 @@ impl Cli {
 
 fn main() {
     let cli = Cli::parse();
+    let char_num = cli.chars.unwrap_or(36);
 
-    let mut uuid: String = uuid::Uuid::new_v4().to_string()
+    let uuid: String = uuid::Uuid::new_v4().to_string()
         .chars()
         .map(|c| cli.replace_ambiguous_char(c))
         .map(|c| cli.maybe_to_uppercase(c))
+        .take(char_num)
         .collect();
-
-    if let Some(chars) = cli.chars {
-        uuid.truncate(chars);
-    }
 
     println!("{}", uuid)
 }
