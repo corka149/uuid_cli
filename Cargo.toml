@@ -1,8 +1,25 @@
 [package]
-name = "uuid_cli"
+name = "uuid"
 version = "0.1.0"
 edition = "2021"
+description = "Creates UUIDs with different combinations"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+rand = "0.8.4"
+
+[dependencies.clap]
+version = "4.1.6"
+features = ["derive"]
+
+[dependencies.uuid]
+version = "1.3.0"
+features = [
+    # Lets you generate random UUIDs
+    "v4",
+    # Use a faster (but still sufficiently random) RNG
+    "fast-rng",
+    # Enable better diagnostics for compile-time UUIDs
+    "macro-diagnostics",
+]
