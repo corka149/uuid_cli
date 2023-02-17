@@ -32,18 +32,25 @@ impl Cli {
             c
         }
     }
+
+    // Updates the given uuid based on the CLI flags.
+    fn update_uuid(&self, uuid: String) -> String {
+        let char_num = self.chars.unwrap_or(36);
+
+        uuid
+        .chars()
+        .map(|c| self.replace_ambiguous_char(c))
+        .map(|c| self.maybe_to_uppercase(c))
+        .take(char_num)
+        .collect()
+    }
 }
 
 fn main() {
     let cli = Cli::parse();
-    let char_num = cli.chars.unwrap_or(36);
 
-    let uuid: String = uuid::Uuid::new_v4().to_string()
-        .chars()
-        .map(|c| cli.replace_ambiguous_char(c))
-        .map(|c| cli.maybe_to_uppercase(c))
-        .take(char_num)
-        .collect();
+    let mut uuid: String = uuid::Uuid::new_v4().to_string();
+    uuid = cli.update_uuid(uuid);
 
     println!("{}", uuid)
 }
