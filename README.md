@@ -8,3 +8,18 @@ Install it from Github:
 ```
 cargo install --git https://github.com/corka149/uuid_cli.git
 ```
+
+## Usage
+
+```
+Creates UUIDs with different combinations
+
+Usage: uuid [OPTIONS]
+
+Options:
+  -r, --random-case        Use random case for characters in UUID
+  -a, --replace-ambiguous  Replace ambiguous 0 by Q
+  -c, --chars <CHARS>      Amount of characters
+  -h, --help               Print help
+
+```
