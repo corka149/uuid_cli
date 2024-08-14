@@ -6,7 +6,7 @@ A quick and easy way to generate UUIDs for different cases.
 
 Install it from Github:
 ```
-cargo install --git https://github.com/corka149/uuid_cli.git
+go install https://github.com/corka149/uuid_cli@latest
 ```
 
 ## Usage
